@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     "games.apps.GamesConfig",
     "pages.apps.PagesConfig",
     "users.apps.UsersConfig",
+    "userscores.apps.UserscoresConfig",
 ]
 
 MIDDLEWARE = [
