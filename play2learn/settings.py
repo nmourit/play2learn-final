@@ -40,7 +40,8 @@ INSTALLED_APPS = [
 
     # local apps
     "games.apps.GamesConfig",
-    'users.apps.UsersConfig',
+    "pages.apps.PagesConfig",
+    "users.apps.UsersConfig",
 ]
 
 MIDDLEWARE = [
