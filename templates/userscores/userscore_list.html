@@ -6,7 +6,7 @@
 	<ul class="list-group list-group-flush mb-3">
 		{% for userscore in userscore_list %}
 			<li class="list-group-item">
-				<a href="{{ userscore.get_absolute_url }}">{{ userscore.score }}</a>
+				{{ userscore.score }}
 			</li>
 		{% endfor %}
 	</ul>
