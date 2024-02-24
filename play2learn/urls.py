@@ -9,10 +9,11 @@ urlpatterns = [
     path("admin/", admin.site.urls),
 
     # User Management
+    path("account/", include("allauth.urls")),
 
     # Local Apps
     path("userscores/", include("userscores.urls")),
     path('', include("games.urls")),
     path('', include("pages.urls")),
-    path('reviews/', include("reviews.urls"))
+    path("reviews/", include("reviews.urls"))
 ]
