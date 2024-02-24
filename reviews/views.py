@@ -21,7 +21,7 @@ class ReviewCreateView(SuccessMessageMixin, LoginRequiredMixin, CreateView):
     
 class ReviewDeleteView(UserPassesTestMixin, DeleteView):
     model = Review
-    success_message = 'Review Deleted'
+    success_url = reverse_lazy('reviews:list')
 
     def delete(self, request, *args, **kwargs):
         result = super().delete(request, *args, **kwargs)
