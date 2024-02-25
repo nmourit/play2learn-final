@@ -44,6 +44,8 @@ INSTALLED_APPS = [
     "allauth",
     "allauth.account",
     "allauth.socialaccount",
+    "crispy_forms",
+    "cripsy_bootstrap5",
 
     # local apps
     "common.apps.CommonConfig",
@@ -55,6 +57,10 @@ INSTALLED_APPS = [
 ]
 
 SITE_ID = 1
+
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+
+CRISPY_TEMPLATE_PACK = "bootstrap5"
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
