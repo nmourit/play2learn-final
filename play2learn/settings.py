@@ -41,11 +41,11 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
 
     # Third-party
+    "crispy_forms",
+    "crispy_bootstrap5",
     "allauth",
     "allauth.account",
     "allauth.socialaccount",
-    "crispy_forms",
-    "crispy_bootstrap5",
 
     # local apps
     "common.apps.CommonConfig",
