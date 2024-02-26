@@ -45,7 +45,7 @@ INSTALLED_APPS = [
     "allauth.account",
     "allauth.socialaccount",
     "crispy_forms",
-    "cripsy_bootstrap5",
+    "crispy_bootstrap5",
 
     # local apps
     "common.apps.CommonConfig",
@@ -134,9 +134,9 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 # AUTHENTICATION SETTINGS
-AUTH_USER_MODEL = 'users.CustomUser'
-LOGIN_URL = 'account_login'
-LOGIN_REDIRECT = 'pages:homepage'
+AUTH_USER_MODEL = "users.CustomUser"
+LOGIN_URL = "account_login"
+LOGIN_REDIRECT = "pages:homepage"
 
 ## django-allauth settings
 ACCOUNT_AUTHENTICATION_METHOD = 'email' # Default: 'username'
