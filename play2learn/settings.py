@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -108,6 +109,15 @@ DATABASES = {
     }
 }
 
+# Email
+SENDGRID_API_KEY = os.environ.get('SENDGRID_API_KEY')
+EMAIL_HOST = 'smtp.sendgrid.net'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'apikey'
+EMAIL_HOST_PASSWORD = SENDGRID_API_KEY
+DEFAULT_FROM_EMAIL = 'admin@example.com'
+
 AUTHENTICATION_BACKENDS = (
     # Needed to login by username in Django admin, even w/o `allauth`
     "django.contrib.auth.backends.ModelBackend",
@@ -175,3 +185,8 @@ STATICFILES_DIRS = [
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+# BOTTOM OF settings.py
+if os.environ.get('ENVIRONMENT') != 'production':
+    from .local_settings import *
+# DON'T PUT ANYTHING BELOW THIS
