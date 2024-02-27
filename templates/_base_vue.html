@@ -72,7 +72,17 @@
     </nav>
   </header>
   <main>
-  {% block main %}{% endblock %}
+    {% if messages %}
+      <ul>
+        {% for message in messages %}
+        <div class="alert message{{ message.tags }} alert-dismissible" role="alert">
+            <strong>{{message}}</strong>
+            <button type="button" class="btn-close" data-dismiss="alert" aria-label="Close"></button>
+        </div>
+        {% endfor %}
+      </ul>
+    {% endif %}
+    {% block main %}{% endblock %}
   </main>
   <footer class="fixed-bottom bg-light row">
     <div class="col">
@@ -80,7 +90,7 @@
       <nav>
         <ul class="nav">
           <li class="nav-item">
-            <a class="nav-link" href="{% url 'pages:contact-us' %} ">Contact</a>
+            <a class="nav-link" href="{% url 'contact:form' %} ">Contact</a>
           </li>
           {% if user.is_staff %}
             <li class="nav-item">
