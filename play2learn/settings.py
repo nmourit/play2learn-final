@@ -137,7 +137,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # AUTHENTICATION SETTINGS
 AUTH_USER_MODEL = "users.CustomUser"
 LOGIN_URL = "account_login"
-LOGIN_REDIRECT = "pages:homepage"
+LOGIN_REDIRECT_URL = "pages:homepage"
 
 ## django-allauth settings
 ACCOUNT_AUTHENTICATION_METHOD = 'email' # Default: 'username'
