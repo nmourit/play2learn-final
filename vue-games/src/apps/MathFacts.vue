@@ -178,7 +178,8 @@ export default {
         "game": "MATH"
       };
       const response = (await this.axios.post("/record-score/", data)).data;
-      console.log(response);
+      this.screen = "start";
+      return response;
     }
   },
   computed: {
