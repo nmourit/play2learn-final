@@ -1,6 +1,5 @@
 import json
 from django.http import JsonResponse
-from django.db.models import Q
 
 from games.models import GameScore
 
