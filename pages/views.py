@@ -5,7 +5,6 @@ from reviews.models import Review
 class HomePageView(TemplateView):
     template_name = 'pages/home.html'
     model = Review
-    print("class")
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
