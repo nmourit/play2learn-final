@@ -10,9 +10,9 @@ class GameScoreAdmin(Play2LearnAdmin):
 
     # List Attributes
     list_display = ['user_name', 'game', 'settings', 'score', 'created']
-    ordering = ['created']
+    ordering = ['-created']
 
     def get_readonly_fields(self, request, obj=None):
         if obj: # editing an existing object
-            return ('created')
+            return ('created',)
         return ()

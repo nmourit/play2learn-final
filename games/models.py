@@ -13,6 +13,9 @@ class GameScore(models.Model):
 
     user_name = models.CharField(max_length=50)
     game = models.TextField(choices=GAME_CHOICES, default=MATH)
-    settings = models.CharField(max_length=100)
+    settings = models.CharField(max_length=50)
     score = models.IntegerField()
     created = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.user_name
