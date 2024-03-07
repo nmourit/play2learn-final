@@ -4,7 +4,7 @@ from django.http import JsonResponse
 from games.models import GameScore
 
 # Create your views here.
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, ListView
 
 class MathFactsView(TemplateView):
     template_name = "math-facts.html"
@@ -12,8 +12,9 @@ class MathFactsView(TemplateView):
 class AnagramHuntView(TemplateView):
     template_name = "anagram-hunt.html"
 
-class GameScoresView(TemplateView):
+class GameScoresView(ListView):
     template_name = "games/game-scores.html"
+    model = GameScore
     paginate_by = 10
 
     def get_context_data(self, **kwargs):
@@ -22,8 +23,9 @@ class GameScoresView(TemplateView):
         context['math_scores'] = GameScore.objects.filter(game__exact='MATH').order_by('-created')
         return context
     
-class LeaderBoardsView(TemplateView):
+class LeaderBoardsView(ListView):
     template_name = "games/leader-boards.html"
+    model = GameScore
     paginate_by = 10
 
     def get_context_data(self, **kwargs):

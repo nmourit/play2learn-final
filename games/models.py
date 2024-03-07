@@ -19,3 +19,8 @@ class GameScore(models.Model):
 
     def __str__(self):
         return self.user_name
+
+    def get_setting_values(self):
+        setting = self.settings
+        setting_split = setting.split(",")
+        return setting_split

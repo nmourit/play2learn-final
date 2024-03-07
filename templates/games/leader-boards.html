@@ -13,7 +13,8 @@
 	  <thead>
 		<tr>
 		  <th>Score</th>
-		  <th>Operation | Max Number</th>
+		  <th>Operation</th>
+		  <th>Max Number</th>
 		  <th>Username</th>
 		  <th>Date</th>
 		</tr>
@@ -25,7 +26,11 @@
 					{{ score.score }}
 				</td>
 				<td>
-					{{ score.settings }}
+					{{ score.get_setting_values.0 }}
+				</td>
+				<td>
+					{{ score.get_setting_values.1 }}
+				</td>
 				<td>
 					{{ score.user_name }}
 				</td>
@@ -61,6 +66,7 @@
 				</td>
 				<td>
 					{{ score.settings }}
+				</td>
 				<td>
 					{{ score.user_name }}
 				</td>

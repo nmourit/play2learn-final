@@ -11,7 +11,9 @@ class ReviewAdmin(Play2LearnAdmin):
     # List Attributes
     date_hierarchy = 'updated'
     list_display = ['title', 'review', 'created', 'updated', 'user']
+    list_filter = ['user', 'created']
     ordering = ['-updated']
+    search_fields = ['user']
 
     # Form Attributes
     autocomplete_fields = ['user']

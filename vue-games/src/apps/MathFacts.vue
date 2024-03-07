@@ -174,7 +174,7 @@ export default {
       const data = {
         "user-name": this.userName,
         "score": this.score,
-        "settings": [this.operation, this.maxNumber],
+        "settings": `${this.operation},${this.maxNumber}`,
         "game": "MATH"
       };
       const response = (await this.axios.post("/record-score/", data)).data;
@@ -221,7 +221,6 @@ export default {
         clearInterval(this.interval);
         this.timeLeft = 60;
         this.screen = "end";
-        this.recordScore(); // call to record score
       }
     }
   }
