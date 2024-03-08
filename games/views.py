@@ -2,6 +2,7 @@ import json
 from django.http import JsonResponse
 
 from games.models import GameScore
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 # Create your views here.
 from django.views.generic import TemplateView, ListView
@@ -12,16 +13,25 @@ class MathFactsView(TemplateView):
 class AnagramHuntView(TemplateView):
     template_name = "anagram-hunt.html"
 
-class GameScoresView(ListView):
+class GameScoresView(TemplateView):
     template_name = "games/game-scores.html"
-    model = GameScore
-    paginate_by = 10
 
     def get_context_data(self, **kwargs):
         username = self.request.user.username
         context = super(GameScoresView, self).get_context_data(**kwargs)
+
+        math_facts_scores =  GameScore.objects.filter(game__exact='MATH', user_name__exact=username).order_by('-created')
+        p = Paginator(math_facts_scores, 2)
+        page_number = self.request.GET.get('math_page')
+        try:
+            math_obj = p.get_page(page_number)
+        except PageNotAnInteger:
+            math_obj = p.page(1)
+        except EmptyPage:
+            math_obj = p.page(p.num_pages)
+        context['math_obj'] = math_obj
+
         context['anagram_scores'] = GameScore.objects.filter(game__exact='ANAGRAM', user_name__exact=username).order_by('-created')
-        context['math_scores'] = GameScore.objects.filter(game__exact='MATH', user_name__exact=username).order_by('-created')
         return context
     
 class LeaderBoardsView(ListView):
@@ -56,4 +66,3 @@ def record_score(request):
         "message": "You need to be logged in.",
         "success": False
     })
-    
