@@ -18,15 +18,16 @@ class GameScoresView(ListView):
     paginate_by = 10
 
     def get_context_data(self, **kwargs):
+        username = self.request.user.username
         context = super(GameScoresView, self).get_context_data(**kwargs)
-        context['anagram_scores'] = GameScore.objects.filter(game__exact='ANAGRAM').order_by('-created')
-        context['math_scores'] = GameScore.objects.filter(game__exact='MATH').order_by('-created')
+        context['anagram_scores'] = GameScore.objects.filter(game__exact='ANAGRAM', user_name__exact=username).order_by('-created')
+        context['math_scores'] = GameScore.objects.filter(game__exact='MATH', user_name__exact=username).order_by('-created')
         return context
     
 class LeaderBoardsView(ListView):
     template_name = "games/leader-boards.html"
     model = GameScore
-    paginate_by = 10
+    paginate_by = 2
 
     def get_context_data(self, **kwargs):
         context = super(LeaderBoardsView, self).get_context_data(**kwargs)
@@ -35,18 +36,24 @@ class LeaderBoardsView(ListView):
         return context
 
 def record_score(request):
-    data = json.loads(request.body)
+    if request.user.username:
+        data = json.loads(request.body)
+        user_name = request.user.username
+        game = data["game"]
+        settings = data["settings"]
+        score = data["score"]
 
-    user_name = data["user-name"]
-    game = data["game"]
-    settings = data["settings"]
-    score = data["score"]
+        new_score = GameScore(user_name=user_name, game=game, settings=settings, score=score)
+        new_score.save()
 
-    new_score = GameScore(user_name=user_name, game=game, settings=settings, score=score)
-    new_score.save()
+        response = {
+            "success": True
+        }
 
-    response = {
-        "success": True
-    }
-
-    return JsonResponse(response)
+        return JsonResponse(response)
+    
+    return JsonResponse({
+        "message": "You need to be logged in.",
+        "success": False
+    })
+    

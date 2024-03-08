@@ -58,15 +58,8 @@
         <button @click="play" class="btn btn-primary w-100 m-1">Play Again</button>
         <button @click="screen = 'start'" class="btn btn-secondary w-100 m-1">Back to Start Screen</button>
       </div>
-      <div class="mt-4">
-        <div class="text-center">
-          <p><em>Enter your username to keep track of your scores!</em></p>
-          <label for="user-name">Username</label>
-          <input name="user-name" id="user-name" v-model="userName" />
-        </div>
-        <div class="row text-center">
-          <button @click="recordScore" class="btn btn-primary w-100 m-1">Record Score</button>
-        </div>
+      <div v-if="userNotLoggedIn">
+        <p class="text-center">You must be logged in to record your score.</p>
       </div>
     </div>
   </div>
@@ -97,6 +90,7 @@ export default {
       correctGuesses: [],
       userInput: "",
       interval: null,
+      userNotLoggedIn: false,
     }
   },
   computed: {
@@ -140,13 +134,13 @@ export default {
       // TODO: when Anagram Hunt finishes, make an Ajax call with axios (this.axios)
       // to record the score on the backend
       const data = {
-        "user-name": this.userName,
         "score": this.score,
         "settings": this.wordLength,
         "game": "ANAGRAM"
       };
       const response = (await this.axios.post("/record-score/", data)).data;
-      this.screen = "start";
+      if (response.message) // "You need to be logged in."
+        this.userNotLoggedIn = true;
       return (response);
     }
   },
@@ -160,6 +154,7 @@ export default {
         this.screen = "end";
         this.timeLeft = 60;
         clearInterval(this.interval);
+        this.recordScore();
       }
     }
   }

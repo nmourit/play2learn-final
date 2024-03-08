@@ -8,6 +8,7 @@
 		<h2>Math Facts</h2>
 	</div>
 </div>
+{% if math_scores %}
 <div class="table-responsive pb-5">
 	<table class="table table-striped" style="min-width: 500px">
 	  <thead>
@@ -21,7 +22,6 @@
 	  </thead>
 	  <tbody>
 			{% for score in math_scores %}
-			{% if score.user_name == user.username %}
 			<tr>
 				<td>
 					{{ score.score }}
@@ -39,17 +39,20 @@
 					{{ score.created}}
 				</td>
 			</tr>
-			{% endif %}
 			{% endfor %}
 	  </tbody>
 	</table>
 </div>
+{% else %}
+<p class="fs-5">No scores yet! Play Math Facts to start tracking!</p>
+{% endif %}
 
 <div class="row">
 	<div class="col-12 col-md-2 col-lg-3">
 		<h2>Anagram Hunt</h2>
 	</div>
 </div>
+{% if anagram_scores %}
 <div class="table-responsive pb-5">
 	<table class="table table-striped" style="min-width: 500px">
 		<thead>
@@ -81,5 +84,8 @@
 		</tbody>
 	</table>
 </div>
+{% else %}
+<p class="fs-5">No scores yet! Play Anagram Hunt to start tracking!</p>
+{% endif %}
 {% include 'includes/pagination.html' %}
 {% endblock %}
