@@ -40,7 +40,7 @@ class ReviewDetailView(DetailView):
 
 class ReviewListView(ListView):
     model = Review
-    paginate_by = 5
+    paginate_by = 1
 
 class ReviewUpdateView(SuccessMessageMixin, UserPassesTestMixin, UpdateView):
     model = Review
