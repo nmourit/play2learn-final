@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    # Built-in Django apps
     "django.contrib.admin",
     "django.contrib.admindocs",
     "django.contrib.auth",
