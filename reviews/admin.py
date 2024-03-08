@@ -15,9 +15,6 @@ class ReviewAdmin(Play2LearnAdmin):
     ordering = ['-updated']
     search_fields = ['user']
 
-    # Form Attributes
-    autocomplete_fields = ['user']
-
     def get_readonly_fields(self, request, obj=None):
         if obj: # editing an existing object
             return ('slug', 'created', 'updated')
