@@ -68,16 +68,6 @@
           </li>
           {% endif %}
         </ul>
-        {% if user.is_authenticated %}
-        <form class="row my-2 my-lg-0 row" action="{% url 'reviews:list' %}">
-          <input class="form-control me-sm-2 col" type="search"
-          placeholder="Search" aria-label="Search" name="q"
-          value="{{ request.GET.q }}">
-          <button class="btn btn-outline-primary my-2 my-sm-0 me-4 col" type="submit">
-            Search
-          </button>
-        </form>
-        {% endif %}
       </div>
     </nav>
   </header>
