@@ -21,7 +21,7 @@ class GameScoresView(TemplateView):
         context = super(GameScoresView, self).get_context_data(**kwargs)
 
         math_facts_scores =  GameScore.objects.filter(game__exact='MATH', user_name__exact=username).order_by('-created')
-        p = Paginator(math_facts_scores, 2)
+        p = Paginator(math_facts_scores, 5)
         page_number = self.request.GET.get('math_page')
         try:
             math_obj = p.get_page(page_number)
@@ -31,7 +31,17 @@ class GameScoresView(TemplateView):
             math_obj = p.page(p.num_pages)
         context['math_obj'] = math_obj
 
-        context['anagram_scores'] = GameScore.objects.filter(game__exact='ANAGRAM', user_name__exact=username).order_by('-created')
+        anagram_hunt_scores =  GameScore.objects.filter(game__exact='ANAGRAM', user_name__exact=username).order_by('-created')
+        p = Paginator(anagram_hunt_scores, 5)
+        page_number = self.request.GET.get('anagram_page')
+        try:
+            anagram_obj = p.get_page(page_number)
+        except PageNotAnInteger:
+            anagram_obj = p.page(1)
+        except EmptyPage:
+            anagram_obj = p.page(p.num_pages)
+        context['anagram_obj'] = anagram_obj
+
         return context
     
 class LeaderBoardsView(ListView):
@@ -41,8 +51,29 @@ class LeaderBoardsView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super(LeaderBoardsView, self).get_context_data(**kwargs)
-        context['anagram_scores'] = GameScore.objects.filter(game__exact='ANAGRAM').order_by('-score')
-        context['math_scores'] = GameScore.objects.filter(game__exact='MATH').order_by('-score')
+        
+        math_facts_scores =  GameScore.objects.filter(game__exact='MATH').order_by('-score')
+        p = Paginator(math_facts_scores, 5)
+        page_number = self.request.GET.get('math_page')
+        try:
+            math_obj = p.get_page(page_number)
+        except PageNotAnInteger:
+            math_obj = p.page(1)
+        except EmptyPage:
+            math_obj = p.page(p.num_pages)
+        context['math_obj'] = math_obj
+
+        anagram_hunt_scores =  GameScore.objects.filter(game__exact='ANAGRAM').order_by('-score')
+        p = Paginator(anagram_hunt_scores, 5)
+        page_number = self.request.GET.get('anagram_page')
+        try:
+            anagram_obj = p.get_page(page_number)
+        except PageNotAnInteger:
+            anagram_obj = p.page(1)
+        except EmptyPage:
+            anagram_obj = p.page(p.num_pages)
+        context['anagram_obj'] = anagram_obj
+
         return context
 
 def record_score(request):

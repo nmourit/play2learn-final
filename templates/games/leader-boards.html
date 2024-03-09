@@ -8,19 +8,20 @@
 		<h2>Math Facts</h2>
 	</div>
 </div>
+{% if math_obj %}
 <div class="table-responsive pb-5">
 	<table class="table table-striped" style="min-width: 500px">
-	  <thead>
+	<thead>
 		<tr>
-		  <th>Score</th>
-		  <th>Operation</th>
-		  <th>Max Number</th>
-		  <th>Username</th>
-		  <th>Date</th>
+		<th>Score</th>
+		<th>Operation</th>
+		<th>Max Number</th>
+		<th>Username</th>
+		<th>Date</th>
 		</tr>
-	  </thead>
-	  <tbody>
-			{% for score in math_scores %}
+	</thead>
+	<tbody>
+		{% for score in math_obj %}
 			<tr>
 				<td>
 					{{ score.score }}
@@ -38,16 +39,21 @@
 					{{ score.created}}
 				</td>
 			</tr>
-			{% endfor %}
-	  </tbody>
+		{% endfor %}
+	</tbody>
 	</table>
 </div>
+{% else %}
+<p class="fs-5">No scores yet! Play Math Facts to start tracking!</p>
+{% endif %}
+{% include 'includes/math-facts-pagination.html' %}
 
 <div class="row">
 	<div class="col-12 col-md-2 col-lg-3">
 		<h2>Anagram Hunt</h2>
 	</div>
 </div>
+{% if anagram_obj %}
 <div class="table-responsive pb-5">
 	<table class="table table-striped" style="min-width: 500px">
 		<thead>
@@ -59,14 +65,13 @@
 			</tr>
 		</thead>
 		<tbody>
-			{% for score in anagram_scores %}
+			{% for score in anagram_obj %}
 			<tr>
 				<td>
 					{{ score.score }}
 				</td>
 				<td>
 					{{ score.settings }}
-				</td>
 				<td>
 					{{ score.user_name }}
 				</td>
@@ -78,5 +83,8 @@
 		</tbody>
 	</table>
 </div>
-{% include 'includes/pagination.html' %}
+{% else %}
+<p class="fs-5">No scores yet! Play Anagram Hunt to start tracking!</p>
+{% endif %}
+{% include 'includes/anagram-hunt-pagination.html' %}
 {% endblock %}
