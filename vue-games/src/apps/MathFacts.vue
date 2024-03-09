@@ -134,7 +134,7 @@ export default {
       number2: 0,
       userInput: "",
       interval: null,
-      timeLeft: 5,
+      timeLeft: 60,
       userNotLoggedIn: false,
     }
   },
