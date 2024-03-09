@@ -24,7 +24,7 @@ class CustomUserAdmin(Play2LearnAdmin, UserAdmin):
     readonly_fields = ['password_form']
 
     # Fields for editing existing user.
-    new_fields = ('dob', 'avatar')
+    new_fields = ('dob',)
     # Add new fields to 'Personal info' fieldset.
     append_fields(UserAdmin.fieldsets, 'Personal info', new_fields)
     # Move email field from 'Personal info' fieldset to unlabelled fieldset
