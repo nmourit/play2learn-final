@@ -5,7 +5,7 @@ from games.models import GameScore
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 # Create your views here.
-from django.views.generic import TemplateView, ListView
+from django.views.generic import TemplateView
 
 class MathFactsView(TemplateView):
     template_name = "math-facts.html"
@@ -44,16 +44,14 @@ class GameScoresView(TemplateView):
 
         return context
     
-class LeaderBoardsView(ListView):
+class LeaderBoardsView(TemplateView):
     template_name = "games/leader-boards.html"
-    model = GameScore
-    paginate_by = 2
 
     def get_context_data(self, **kwargs):
         context = super(LeaderBoardsView, self).get_context_data(**kwargs)
         
         math_facts_scores =  GameScore.objects.filter(game__exact='MATH').order_by('-score')
-        p = Paginator(math_facts_scores, 5)
+        p = Paginator(math_facts_scores, 10)
         page_number = self.request.GET.get('math_page')
         try:
             math_obj = p.get_page(page_number)
@@ -64,7 +62,7 @@ class LeaderBoardsView(ListView):
         context['math_obj'] = math_obj
 
         anagram_hunt_scores =  GameScore.objects.filter(game__exact='ANAGRAM').order_by('-score')
-        p = Paginator(anagram_hunt_scores, 5)
+        p = Paginator(anagram_hunt_scores, 10)
         page_number = self.request.GET.get('anagram_page')
         try:
             anagram_obj = p.get_page(page_number)
