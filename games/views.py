@@ -14,7 +14,7 @@ class AnagramHuntView(TemplateView):
     template_name = "anagram-hunt.html"
 
 class GameScoresView(TemplateView):
-    template_name = "games/game-scores.html"
+    template_name = "game-scores.html"
 
     def get_context_data(self, **kwargs):
         username = self.request.user.username
@@ -45,7 +45,7 @@ class GameScoresView(TemplateView):
         return context
     
 class LeaderBoardsView(TemplateView):
-    template_name = "games/leader-boards.html"
+    template_name = "leader-boards.html"
 
     def get_context_data(self, **kwargs):
         context = super(LeaderBoardsView, self).get_context_data(**kwargs)
