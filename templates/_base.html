@@ -47,6 +47,9 @@
             <a class="nav-link" href="{% url 'account_signup' %}">Sign up</a>
           </li>
           {% else %}
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'games:game-history' %}">Game History</a>
+          </li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" 
               role="button" data-bs-toggle="dropdown" aria-haspopup="true"
@@ -55,7 +58,6 @@
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
               <a class="dropdown-item" href="{% url 'my-account' %}">My Account</a>
-              <a class="dropdown-item" href="{% url 'games:game-scores' %}">My Game Scores</a>
               <a class="dropdown-item" 
               href="{% url 'reviews:creator' user.username %}">
               My Reviews</a>

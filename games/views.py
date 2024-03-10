@@ -13,15 +13,15 @@ class MathFactsView(TemplateView):
 class AnagramHuntView(TemplateView):
     template_name = "anagram-hunt.html"
 
-class GameScoresView(TemplateView):
-    template_name = "game-scores.html"
+class GameHistoryView(TemplateView):
+    template_name = "game-history.html"
 
     def get_context_data(self, **kwargs):
         username = self.request.user.username
-        context = super(GameScoresView, self).get_context_data(**kwargs)
+        context = super(GameHistoryView, self).get_context_data(**kwargs)
 
         math_facts_scores =  GameScore.objects.filter(game__exact='MATH', user_name__exact=username).order_by('-created')
-        p = Paginator(math_facts_scores, 5)
+        p = Paginator(math_facts_scores, 10)
         page_number = self.request.GET.get('math_page')
         try:
             math_obj = p.get_page(page_number)
@@ -32,7 +32,7 @@ class GameScoresView(TemplateView):
         context['math_obj'] = math_obj
 
         anagram_hunt_scores =  GameScore.objects.filter(game__exact='ANAGRAM', user_name__exact=username).order_by('-created')
-        p = Paginator(anagram_hunt_scores, 5)
+        p = Paginator(anagram_hunt_scores, 10)
         page_number = self.request.GET.get('anagram_page')
         try:
             anagram_obj = p.get_page(page_number)
